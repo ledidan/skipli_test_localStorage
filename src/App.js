@@ -37,15 +37,21 @@ class App extends React.Component {
 
   handleMessage = (event) => {
     // Check the origin to ensure it's from a trusted root domain
-    console.log('Received message event:', event);
-    console.log('Received message from origin:', event.origin);
-    console.log('Received message data:', event.data);
-  
+
     // Log the entire local storage
-    console.log('Local Storage:', localStorage);
     if (event.origin === "https://order.skiplisalon.com") {
       console.log("Message from root domain:", event.data);
-      console.log("Message from root domain uuid:", localStorage.getItem("uuid"));
+      if (event.data.type === "UUID_MESSAGE") {
+        const receivedUUID = event.data.uuid;
+        localStorage.setItem("uuid", receivedUUID);
+
+        // Update the component state if needed
+        this.setState({ uuid: receivedUUID });
+      }
+      console.log(
+        "Message from root domain uuid:",
+        localStorage.getItem("uuid")
+      );
 
       // Handle the data received from the root domain
     }
