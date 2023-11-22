@@ -1,5 +1,5 @@
 import React from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import logo from "./logo.svg";
 import "./App.css";
@@ -25,6 +25,10 @@ class App extends React.Component {
       const newUUID = uuidv4();
       localStorage.setItem("uuid", newUUID);
       this.setState({ uuid: newUUID });
+
+      // Send a postMessage to the other page
+      const data = { key: "uuid", value: localStorage.getItem("uuid") };
+      window.postMessage(data, "https://www.order.skiplisalon.com");
     }
   }
 
