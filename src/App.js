@@ -27,10 +27,18 @@ class App extends React.Component {
       this.setState({ uuid: newUUID });
 
       // Send a postMessage to the other page
-      const data = { key: "uuid", value: localStorage.getItem("uuid") };
-      window.postMessage(data, "https://www.order.skiplisalon.com");
     }
   }
+  sendMessageToSubdomain = () => {
+    // Get the iframe element
+    const subdomainFrame = document.getElementById("subdomain-frame");
+
+    // Post a message to the subdomain
+    subdomainFrame.contentWindow.postMessage(
+      "Hello from the root domain!",
+      "https://order.skiplisalon.com"
+    );
+  };
 
   render() {
     const { uuid } = this.state;
@@ -42,6 +50,16 @@ class App extends React.Component {
           <h1>ROOT DOMAIN SKIPLI LOCAL STORAGE</h1>
           <p>UUID: {uuid}</p>
         </header>
+        <div>
+          <button onClick={this.sendMessageToSubdomain}>
+            Send Message to Subdomain
+          </button>
+          <iframe
+            id="subdomain-frame"
+            title="Subdomain Frame"
+            src="https://order.skiplisalon.com"
+          ></iframe>
+        </div>
       </div>
     );
   }
