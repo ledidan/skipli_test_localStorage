@@ -26,9 +26,8 @@ class App extends React.Component {
     // Check the origin to ensure it's from the trusted subdomain
     if (event.origin === "https://order.skiplisalon.com") {
       const storedUUID = localStorage.getItem("uuid");
-      const { value = { storedUUID } } = event.currentTarget;
       // Send a postMessage to the subdomain after setting local storage
-      window.parent.postMessage(value, "https://order.skiplisalon.com");
+      window.parent.postMessage(storedUUID, "https://order.skiplisalon.com");
     }
   };
 
