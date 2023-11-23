@@ -14,22 +14,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // Check if UUID is already in local storage
-    const storedUUID = localStorage.getItem("uuid");
-
-    if (storedUUID) {
-      // If UUID exists, use it
-      this.setState({ uuid: storedUUID });
-    } else {
-      // If UUID doesn't exist, generate a new one and save it to local storage
-      const newUUID = uuidv4();
-      localStorage.setItem("uuid", newUUID);
-      this.setState({ uuid: newUUID });
-
-      // Send a postMessage to the subdomain after setting local storage
-      window.parent.postMessage(newUUID, "https://order.skiplisalon.com");
-    }
-
     window.addEventListener("message", this.handleMessage);
   }
 
@@ -41,7 +25,10 @@ class App extends React.Component {
   handleMessage = (event) => {
     // Check the origin to ensure it's from the trusted subdomain
     if (event.origin === "https://order.skiplisalon.com") {
-      console.log("0b577c76-4297-4055-b9fc-087dcb62226d");
+      const storedUUID = localStorage.getItem("uuid");
+      const { value = { storedUUID } } = event.currentTarget;
+      // Send a postMessage to the subdomain after setting local storage
+      window.parent.postMessage(value, "https://order.skiplisalon.com");
     }
   };
 
