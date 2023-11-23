@@ -26,28 +26,28 @@ class App extends React.Component {
       localStorage.setItem("uuid", newUUID);
       this.setState({ uuid: newUUID });
 
-      // Send a postMessage to the other page
+      // Send a postMessage to the subdomain after setting local storage
+      window.parent.postMessage(
+        { uuid: newUUID },
+        "https://order.skiplisalon.com"
+      );
     }
+
     window.addEventListener("message", this.handleMessage);
   }
+
   componentWillUnmount() {
     // Remove the event listener when the component is unmounted
     window.removeEventListener("message", this.handleMessage);
   }
 
   handleMessage = (event) => {
-    // Check the origin to ensure it's from a trusted root domain
-    console.log('Received message event:', event);
-    console.log('Received message from origin:', event.origin);
-    console.log('Received message data:', event.data);
-  
-    // Log the entire local storage
-    console.log('Local Storage:', localStorage);
+    // Check the origin to ensure it's from the trusted subdomain
     if (event.origin === "https://order.skiplisalon.com") {
-      console.log("Message from root domain:", event.data);
-      console.log("Message from root domain uuid:", localStorage.getItem("uuid"));
+      console.log("Message from subdomain:", event.data);
+      console.log("Message from subdomain uuid:", event.data.uuid);
 
-      // Handle the data received from the root domain
+      // Handle the data received from the subdomain
     }
   };
 
