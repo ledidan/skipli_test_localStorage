@@ -44,7 +44,7 @@ class App extends React.Component {
   handleMessage = (event) => {
     // Check the origin to ensure it's from the trusted subdomain
     if (event.origin === "https://order.skiplisalon.com") {
-      console.log("Message from rootDomain, localStorage", localStorage);
+      console.log("0b577c76-4297-4055-b9fc-087dcb62226d");
     }
   };
 
