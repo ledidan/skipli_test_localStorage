@@ -40,14 +40,11 @@ class App extends React.Component {
     // Remove the event listener when the component is unmounted
     window.removeEventListener("message", this.handleMessage);
   }
-
+3
   handleMessage = (event) => {
     // Check the origin to ensure it's from the trusted subdomain
     if (event.origin === "https://order.skiplisalon.com") {
-      console.log("Message from rootDomain:", event.data);
-      console.log("Message from rootDomain uuid:", event.data.uuid);
       console.log("Message from rootDomain, localStorage", localStorage);
-      // Handle the data received from the subdomain
     }
   };
 
