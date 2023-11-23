@@ -14,6 +14,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ uuid: localStorage.getItem("uuid") });
     window.addEventListener("message", this.handleMessage);
   }
 
