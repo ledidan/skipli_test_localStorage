@@ -27,10 +27,7 @@ class App extends React.Component {
       this.setState({ uuid: newUUID });
 
       // Send a postMessage to the subdomain after setting local storage
-      window.parent.postMessage(
-        { uuid: newUUID },
-        "https://order.skiplisalon.com"
-      );
+      window.parent.postMessage(newUUID, "https://order.skiplisalon.com");
     }
 
     window.addEventListener("message", this.handleMessage);
@@ -40,7 +37,7 @@ class App extends React.Component {
     // Remove the event listener when the component is unmounted
     window.removeEventListener("message", this.handleMessage);
   }
-3
+  3;
   handleMessage = (event) => {
     // Check the origin to ensure it's from the trusted subdomain
     if (event.origin === "https://order.skiplisalon.com") {
