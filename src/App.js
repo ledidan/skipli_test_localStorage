@@ -18,12 +18,11 @@ class App extends React.Component {
 
     if (storedUuid) {
       this.setState({ uuid: storedUuid });
-    } 
-    // else {
-    //   const newUuid = uuidv4();
-    //   localStorage.setItem("uuid", newUuid);
-    //   this.setState({ uuid: newUuid });
-    // }
+    } else {
+      const newUuid = uuidv4();
+      localStorage.setItem("uuid", newUuid);
+      this.setState({ uuid: newUuid });
+    }
 
     window.addEventListener("message", this.handleMessage);
   }
