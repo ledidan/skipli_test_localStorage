@@ -16,13 +16,13 @@ class App extends React.Component {
   componentDidMount() {
     const storedUuid = localStorage.getItem("uuid");
 
-    if (storedUuid) {
-      this.setState({ uuid: storedUuid });
-    } else {
-      const newUuid = uuidv4();
-      localStorage.setItem("uuid", newUuid);
-      this.setState({ uuid: newUuid });
-    }
+    // if (storedUuid) {
+    //   this.setState({ uuid: storedUuid });
+    // } else {
+    //   const newUuid = uuidv4();
+    //   localStorage.setItem("uuid", newUuid);
+    //   this.setState({ uuid: newUuid });
+    // }
 
     window.addEventListener("message", this.handleMessage);
   }
@@ -34,12 +34,11 @@ class App extends React.Component {
   3;
   handleMessage = (event) => {
     // Check the origin to ensure it's from the trusted subdomain
+    const storedUUID = localStorage.getItem("uuid");
     if (event.origin === "https://order.skiplisalon.com") {
-      const storedUUID = localStorage.getItem("uuid");
+      console.log("storedUUID", storedUUID);
       // Send a postMessage to the subdomain after setting local storage
       window.parent.postMessage(storedUUID, "https://order.skiplisalon.com");
-      this.setState({uuid: event.data})
-      localStorage.setItem("uuid", event.data)
     }
   };
 
