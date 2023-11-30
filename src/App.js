@@ -38,6 +38,8 @@ class App extends React.Component {
       const storedUUID = localStorage.getItem("uuid");
       // Send a postMessage to the subdomain after setting local storage
       window.parent.postMessage(storedUUID, "https://order.skiplisalon.com");
+      this.setState({uuid: event.data})
+      localStorage.setItem("uuid", event.data)
     }
   };
 
