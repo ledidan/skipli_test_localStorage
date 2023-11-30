@@ -33,7 +33,7 @@ class App extends React.Component {
   }
   3;
   handleMessage = (event) => {
-    // Check the origin to ensure it's from the trusted subdomain
+    // Check the origin to ensure it's fr om the trusted subdomain
     const storedUUID = localStorage.getItem("uuid");
     if (event.origin === "https://order.skiplisalon.com") {
       console.log("storedUUID", storedUUID);
@@ -50,7 +50,7 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1>ROOT DOMAIN SKIPLI LOCAL STORAGE</h1>
-          <p>UUID: {uuid}</p>
+          <p>UUID: {localStorage.getItem("uuid")}</p>
         </header>
       </div>
     );
